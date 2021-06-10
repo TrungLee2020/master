@@ -22,7 +22,7 @@ def segment_chars(plate_img, fixed_width):
 
     V = cv2.split(cv2.cvtColor(plate_img, cv2.COLOR_BGR2HSV))[2]
 
-    thresh = cv2.adaptiveThreshold(value, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+    thresh = cv2.adaptiveThreshold(V, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
     thresh = cv2.bitwise_not(thresh)
 
@@ -105,7 +105,7 @@ class PlateFinder:
         # otsu's thresholding
         ret2, threshold_img = cv2.threshold(sobelx, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-        element = self..element_structure
+        element = self.element_structure
         morph_n_thresholded_img = threshold_img.copy()
         cv2.morphologyEx(src = threshold_img, op=cv2.MORPH_CLOSE, kernel=element, dst=morph_n_thresholded_img)
 
